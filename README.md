@@ -1,3 +1,5 @@
+***See bottom for additional read me content.***
+
 # Module One Final Project Guidelines
 
 Congratulations, you're at the end of module one! You've worked crazy hard to get here and have learned a ton.
@@ -57,3 +59,37 @@ Projects need to be approved prior to launching into them, so take some time to 
 # in config/environment.rb add this line:
 ActiveRecord::Base.logger = nil
 ```
+---
+
+ToDo List:
+- Update Readme file
+- Mock CSV files for user, recipe, and favorite.
+- Set up environment.
+- Create database via migration.
+- Create models for user, recipe, and favorite.
+- Double check schema.
+- Create run.rb.
+
+---
+
+Create 
+- Grace = User
+- Baron = Recipe
+- Both = Favorite
+
+Read
+- User - Searching/querying database for recipe based on ingredient.
+- User - Searching/querying database for recipe based on cuisine.
+- User - Searching/querying database for recipe based on calories/serving.
+- User - Read self favorites list.
+- Recipes - Read self favorite count.
+? Recipes - Read self reviews count.
+
+Update
+- User - Update and delete favorites.
+- User - Update username.
+
+Delete
+- Delete favorites.
+- Delete user account.
+- Delete review.
