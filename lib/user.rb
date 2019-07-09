@@ -2,6 +2,57 @@ class User < ActiveRecord::Base
     has_many :favorites
     has_many :recipes, through: :favorites
 
+#new user created
+    def create_user(username, first_name)
+        User.create(username: username, first_name: first_name)
+    end
+
+#delete existing user
+    def delete_user
+        user = User.find_by(username: self.username)
+        user.destroy
+    end
+
+#find User instance if a user selects "existing user"
+    def find_user(username)
+        User.find_by(username: username)
+    end
+
+
+
+# # User can add a recipe to their favorites
+#     def add_favorites
+#         Favorite.create(self,recipe)
+#     end
+
+# User can un-favorite
+    def remove_from_favorites
+        favorite = Favorite.find_by(user_id: self.id)
+        favorite.delete
+    end
+
+#User wants to see their favorited recipes
+
+    # def view_favorites
+
+    # end
+
+
+
+
+
+
+
+
+
+
+end
+
+
+# puts "Hello, it's working."
+
+# puts users = User.all.map(&:username)
+
     # csv_data = 
     # "1,mdrable0,Martin,Drable,PgYkJucV
     # 2,rgilhooley1,Roanne,Gilhooley,x5mjEZ
@@ -28,10 +79,3 @@ class User < ActiveRecord::Base
     # end
     
     # users
-end
-
-
-
-puts "Hello, it's working."
-
-puts users = User.all.map(&:username)

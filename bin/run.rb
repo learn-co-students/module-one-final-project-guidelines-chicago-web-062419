@@ -1,12 +1,6 @@
 require_relative '../config/environment'
 # !/usr/bin/env ruby
 
-
-puts "HELLO WORLD"
-
+welcome
 
 
-
-
-# cli = CommandLineInterface.new
-# cli.greet
