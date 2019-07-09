@@ -62,10 +62,11 @@ ActiveRecord::Base.logger = nil
 ---
 
 ToDo List:
-- Update Readme file
+- Update Readme file 
 - Mock CSV files for user, recipe, and favorite.
 - Set up environment.
 - Create database via migration.
+- Seed.
 - Create models for user, recipe, and favorite.
 - Double check schema.
 - Create run.rb.
@@ -79,7 +80,6 @@ Create
 
 Read
 - User - Searching/querying database for recipe based on ingredient.
-- User - Searching/querying database for recipe based on cuisine.
 - User - Searching/querying database for recipe based on calories/serving.
 - User - Read self favorites list.
 - Recipes - Read self favorite count.
