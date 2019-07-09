@@ -1,5 +1,6 @@
 User.destroy_all
 Recipe.destroy_all
+Favorite.destroy_all
 
 # Create User instances:
 martin = User.create(
