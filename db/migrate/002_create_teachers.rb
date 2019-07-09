@@ -4,7 +4,6 @@ class CreateTeachers < ActiveRecord::Migration[5.0]
             t.string :first_name
             t.string :last_name
             t.string :gender
-            t.integer :grade
             t.integer :age
         end
     end

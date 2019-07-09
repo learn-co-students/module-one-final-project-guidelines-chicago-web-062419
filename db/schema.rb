@@ -12,10 +12,9 @@
 
 ActiveRecord::Schema.define(version: 3) do
 
-  create_table "schools", force: :cascade do |t|
-    t.string "name"
-    t.string "location"
-    t.string "date_erected"
+  create_table "connections", force: :cascade do |t|
+    t.integer "student_id"
+    t.integer "teacher_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -31,7 +30,6 @@ ActiveRecord::Schema.define(version: 3) do
     t.string  "first_name"
     t.string  "last_name"
     t.string  "gender"
-    t.integer "grade"
     t.integer "age"
   end
 
