@@ -98,17 +98,31 @@ def options(new_user)
         elsif user == "View favorites"
             puts "My Favorites"
             puts view_favorites(new_user)
-            puts "Return home? (y/n)"
-                input = gets.chomp
-                if input == "y"
-                    puts `clear`
-                    puts options(new_user)
-                else ""
+            prompt = TTY::Prompt.new
+            # user_input = prompt.select("What would you like to do today?", %w(Search recipes by keyword "Search recipes by calories", "View favorited search_recipes_by_ingredient"))
+            userprompt = prompt.select("Menu") do |menu|
+                menu.choice 'Delete_Favorite'
+                menu.choice 'Return_Home'
                 end
+                if userprompt == "Return_Home"
+                    puts options(new_user)
+                elsif userprompt == "Delete_Favorite"
+                    puts `clear`
+                    puts delete_title(new_user)
+                    puts "\n"
+                    puts "Return Home (y/n)"
+                        input = gets.chomp
+                        if input == "y"
+                            puts options(new_user)
+                        elsif input == "n"
+                            puts "Seeya Later!"
+                        else ""
+                    end
         else
             puts ''
         end
         # binding.pry
+    end
 end
 
 
@@ -122,7 +136,7 @@ def chicken_select(x, new_user)
     puts "\n"
     ################################ADD TTY PROMPT##########################################
     puts "1. ♥ Add to Favorites"
-    puts "2. Return to Home"
+    puts "2. ⌂ Return to Home"
     input = gets.chomp.to_i
     if input == 1
         create_favorite(new_user, x)
@@ -151,12 +165,48 @@ def view_favorites(new_user)
     get_my_faves.each do |fave|
         new_array << fave.recipe.id
     end 
-    new_array.map do |id|
-        puts find_recipe_title(id)
+    
+    favorites = new_array.map do |id|
+        find_recipe_title(id)
     end
+
+    array = []
+    favorites.each.with_index(1) do |s,i|
+        array << "#{i} #{s}"
+    end            
+    
 end
 
 def find_recipe_title(id)
     a = Recipe.find(id)
     a.title
 end
+
+def delete_title(new_user)
+#get the recipe ids in my user favorites
+    get_my_faves = Favorite.where(user_id: new_user.id)
+    new_array = []
+    get_my_faves.each do |fave|
+        new_array << fave.recipe.id
+    end 
+#get the title of these recipes  
+    fav_titles = []
+    new_array.map do |id|
+        fav_titles << find_recipe_title(id)
+    end
+      
+    prompt = TTY::Prompt.new
+    answer = prompt.select("Which Recipe Would You Like To Delete?", fav_titles)  
+        fav_titles.each do |x| #title return
+            if answer == x 
+                a = Recipe.find_by(title: x)
+                b = a.id
+                c = Favorite.where(recipe_id: b, user_id: new_user.id).destroy_all
+            else ""
+            end
+        end
+    puts "You have deleted #{answer} from your favourites"
+    # binding.pry
+
+end
+                
