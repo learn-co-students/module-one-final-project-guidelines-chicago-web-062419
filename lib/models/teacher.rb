@@ -65,6 +65,14 @@ class Teacher < ActiveRecord::Base
         puts "#{teacher_inst.average_gpa_per_teacher}"
         puts "#{teacher_inst.view_class_list.count}"
     end
+
+    def self.teacher_list_sorted
+        sorted_teachers = Teacher.all.sort_by{|teacher| teacher.last_name}
+        sorted_teachers.map do |teacher|
+            teacher.full_name
+        end
+
+    end
     #part of ActiveRecord
     # def self.total_teachers
     #     Teacher.count
