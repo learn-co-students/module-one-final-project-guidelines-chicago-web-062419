@@ -2,7 +2,8 @@ class Favorite < ActiveRecord::Base
     belongs_to :user
     belongs_to :recipe
 
-    def create_favorite
-        Favorite.create(:user_id, :recipe_id)
-    end
+    #work in progress =  how to add to favorites
+    # def create_favorite
+    #     Favorite.create
+    # end
 end

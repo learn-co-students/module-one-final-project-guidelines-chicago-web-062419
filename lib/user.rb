@@ -2,9 +2,9 @@ class User < ActiveRecord::Base
     has_many :favorites
     has_many :recipes, through: :favorites
 
-#new user created
-    def create_user(username, first_name)
-        User.create(username: username, first_name: first_name)
+#new user created - to be confirmed
+    def create_user(username)
+        User.create(username: username)
     end
 
 #delete existing user
