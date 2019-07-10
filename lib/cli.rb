@@ -1,12 +1,16 @@
 require 'pry'
+require "tty-prompt"
+
+# puts `clear`
 
 def welcome
-    # prompt = TTY::Prompt.new
-    # # prompt.ask('Welcome, hungry human')
-    # prompt.yes?('Do you like Ruby?')
-    puts "Welcome, hungry human!", "1. New User?", "2. Existing User?"
-    user_input = gets.chomp
-    if user_input.to_i == 1
+    
+    puts "Welcome, hungry human!"
+    prompt = TTY::Prompt.new
+    user_input = prompt.select("What type of user are you?", %w(New Existing))
+
+    # user_input = gets.chomp
+    if user_input == "New"
         puts "Please create username"
         a = gets.chomp
         User.create(username: a)
@@ -22,12 +26,12 @@ def welcome
             else
                 puts ''
             end
-    elsif user_input.to_i == 2
+    elsif user_input == "Existing"
         puts "Please enter username"
         name = gets.chomp
         puts "Welcome back, #{name}. What would you like to do today?"
         puts options
-    else puts "nah"
+    else puts ''
     end
     # binding.pry
     # clear the screen for next method.
@@ -37,7 +41,7 @@ def search_recipes_by_ingredient
     puts "What ingredient would you like to search recipes for?"
     input = gets.chomp.capitalize
     search = Recipe.where("title like ?", "%#{input}%")
-    search 
+    search.title
     # binding.pry
 end
 
@@ -52,9 +56,11 @@ def view_favorites
 end
 
 def options
-puts "1. Search recipes by keyword"
-puts "2. Search recipes by calories"
-puts "3. View favorited recipes"
+    prompt = TTY::Prompt.new
+    user_input = prompt.select("What type of user are you?", %w(New Existing))
+    puts "1. Search recipes by keyword"
+    puts "2. Search recipes by calories"
+    puts "3. View favorited recipes"
 end
 
 
