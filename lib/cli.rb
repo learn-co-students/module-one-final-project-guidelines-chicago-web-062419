@@ -27,11 +27,6 @@ def welcome
     end
 end
     
-# def search_recipes_by_calories
-#     puts "Calorie counting? How many calories would you like your recipe to be within?"
-#     input = gets.chomp.to_f
-#     Recipe.search_by_calories(input)
-# end
 
 def options(new_user)
     puts "HOME"
@@ -97,15 +92,18 @@ def options(new_user)
                 end
         elsif user == "View favorites"
             puts "My Favorites"
-            puts view_favorites(new_user)
-            prompt = TTY::Prompt.new
+            if view_favorites(new_user).empty? 
+                puts "You have no favorite recipes :("
+            else
+                puts view_favorites(new_user)
+                prompt = TTY::Prompt.new
             # user_input = prompt.select("What would you like to do today?", %w(Search recipes by keyword "Search recipes by calories", "View favorited search_recipes_by_ingredient"))
-            userprompt = prompt.select("Menu") do |menu|
-                menu.choice 'Delete_Favorite'
-                menu.choice 'Return_Home'
-                end
+                userprompt = prompt.select("Menu") do |menu|
+                    menu.choice 'Delete_Favorite'
+                    menu.choice 'Return_Home'
+                    end
                 if userprompt == "Return_Home"
-                    puts options(new_user)
+                        puts options(new_user)
                 elsif userprompt == "Delete_Favorite"
                     puts `clear`
                     puts delete_title(new_user)
@@ -117,12 +115,13 @@ def options(new_user)
                         elsif input == "n"
                             puts "Seeya Later!"
                         else ""
-                    end
-        else
-            puts ''
-        end
+                        end
+                else
+                     puts ''
+                end
+             end
         # binding.pry
-    end
+        end
 end
 
 
